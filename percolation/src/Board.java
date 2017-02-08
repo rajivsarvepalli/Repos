@@ -143,6 +143,7 @@ public class Board {
       StdOut.println(a);
       for (Board board: a.neighbors()) {
           StdOut.println(board);
+      System.out.println("hi");
       }// unit tests (not graded)
 }
 }
