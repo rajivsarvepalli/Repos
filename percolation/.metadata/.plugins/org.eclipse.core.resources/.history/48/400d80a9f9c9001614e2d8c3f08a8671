@@ -1,0 +1,41 @@
+import java.util.Comparator;
+
+import edu.princeton.cs.algs4.StdDraw;
+
+public class Point implements Comparable<Point> {
+	private final int xcord;
+	private final int ycord;
+   public Point(int x, int y){// constructs the point (x, y)
+	   this.xcord =x;
+	   this.ycord =y;
+   }
+   public   void draw(){
+	   StdDraw.point(xcord, ycord);// draws this point
+   }
+   public   void drawTo(Point that){
+	   StdDraw.line(this.xcord, this.ycord, that.xcord, that.ycord);// draws the line segment from this point to that point
+   }
+   public String toString(){ // string representation
+	   return "(" + xcord + ", " + ycord + ")";
+   }   
+   public int compareTo(Point that){
+	   int diff = this.ycord-that.ycord;
+	   if(diff==0)
+		   diff = this.xcord-that.ycord;
+	   return diff;// compare two points by y-coordinates, breaking ties by x-coordinates
+   }
+   public double slopeTo(Point that){
+	        if (this.ycord - that.ycord == 0) {
+	            if (this.xcord - that.xcord == 0) {
+	                return Double.NEGATIVE_INFINITY;
+	            }
+	        } else if (this.xcord - that.xcord == 0) {
+	            return Double.POSITIVE_INFINITY;
+	        }
+	        else
+	        	return (that.ycord - this.ycord) / (double) (that.xcord - this.xcord);
+	    }
+   public Comparator<Point> slopeOrder(){// compare two points by slopes they make with this point
+	   
+   }
+   }

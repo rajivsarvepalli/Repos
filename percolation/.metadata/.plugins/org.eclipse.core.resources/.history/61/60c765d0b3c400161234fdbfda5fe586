@@ -1,0 +1,53 @@
+
+public class Percolation {
+	private int array[][];
+	private boolean check[][];
+	private Union uf;
+	private int max;
+	public Percolation(int n){
+		  max =n*n+2;
+		  uf = new Union(max);
+		  array = new int[n][n];  
+		  check = new boolean[n][n];
+		   // create n-by-n grid, with all sites blocked
+		  int num =2;
+		  for(int row = 0; row<array.length;row++){
+			  for(int col = 0; col <array[row].length;col++){
+				  num++;
+				  array[row][col] = num;
+				  check[row][col] =false;
+			  }
+		  }
+	   }
+	   public void open(int row, int col){
+		   check[row][col] =true;
+		   if(isOpen(row+1,col))
+			   	uf.union(array[row][col],array[row+1][col]);
+		   if(isOpen(row,col+1))
+			   	uf.union(array[row][col],array[row][col+1]);
+	/*	   if(isOpen(row-1,col)&&row-1>-1)
+			   	uf.union(array[row][col],array[row-1][col]);
+		   if(isOpen(row,col-1)&&col-1>-1)
+			   	uf.union(array[row][col],array[row][col-1]);
+		   else{}
+*/			   	
+	   }// open site (row, col) if it is not open already
+	   public boolean isOpen(int row, int col){
+		   return check[row][col];
+	   }// is site (row, col) open?
+	   public boolean isFull(int row, int col){
+		   return uf.connected(0,array[row][col]);
+		   // is site (row, col) full?
+	   }
+	   public boolean percolates(){
+		   return uf.connected(0,max-1);// does the system percolate?
+	   }
+
+	   public static void main(String[] args) {  // test client (optional)
+		   System.out.println("hello");
+		   Percolation object = new Percolation(2);
+		   object.open(0,0);
+		   object.open(1,0);
+		   System.out.println(object.percolates());
+	} 
+}

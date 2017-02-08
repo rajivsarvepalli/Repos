@@ -1,0 +1,43 @@
+public class BruteCollinearPoints {
+	private Point[] points;
+	private LineSegment[] segment;
+	private int count=0;
+   public BruteCollinearPoints(Point[] points){
+	   this.points = points;
+	   segment = new LineSegment[points.length/4];
+	   for (int p = 0; p < points.length - 3; p++) {
+           for (int q = p + 1; q < points.length - 2; q++) {
+               for (int r = q + 1; r < points.length - 1; r++) {
+                   for (int s = r + 1; s < points.length; s++) {
+                	   if(points[p].slopeTo(points[q])==points[p].slopeTo(points[r])&&
+                	      points[p].slopeTo(points[q])==points[p].slopeTo(points[s])){
+                		   segment[count] = new LineSegment(points[p],points[q]);
+                		   count++;   	   
+                	   }  
+                	   }
+                	   }
+                	   }
+                		   
+                   }
+   }// finds all line segments containing 4 points
+   public int numberOfSegments(){
+	   return count;
+	   
+   }// the number of line segments
+   public LineSegment[] segments(){
+	   return segment;
+}// the line segments
+   public static void main(String[] args){
+	   Point p1 = new Point(3,4);
+	   Point p2 = new Point(4,4);
+	   Point p3 = new Point(5,4);
+	   Point p4 = new Point(6,4);
+	   Point[] array ={p1,p2,p3,p4};
+	   BruteCollinearPoints points = new BruteCollinearPoints(array);
+	   for(LineSegment p: points.segment){
+		   System.out.print(p + " ");
+		   
+	   }
+	   
+}
+}

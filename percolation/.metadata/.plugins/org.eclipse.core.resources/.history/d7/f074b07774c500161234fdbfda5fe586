@@ -1,0 +1,57 @@
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+public class PercolationStats {
+	private Percolation obj;
+	private int getTrials;
+	private double array[];
+	private int getN;
+	   public PercolationStats(int n, int trials){
+		   obj =new Percolation(n);
+		   getTrials =trials; 
+		   getN=n;
+		   array = new double[trials];
+		   for(int i=0; i<trials;i++)
+			   	array[i]= percThresh();
+		   // perform trials independent experiments on an n-by-n grid
+	   }
+	   public double mean(){
+		   return StdStats.mean(array);
+		   }
+		   // sample mean of percolation threshold
+	   public double stddev(){
+		   return StdStats.stddev(array);
+		   // sample standard deviation of percolation threshold
+	   }
+	   public double confidenceLo() {
+		   return mean()-1.96/(Math.sqrt(getTrials*1.0));
+		   // low  endpoint of 95% confidence interval
+	   }
+	   public double confidenceHi() {
+		   return mean()+1.96/(Math.sqrt(getTrials*1.0));
+		   // high endpoint of 95% confidence interval
+	   }
+	   public double percThresh() {
+		    int row, col;
+		    double counter = 0;
+		    while (!obj.percolates()) {
+		      do {
+		        row = StdRandom.uniform(getN);
+		        col = StdRandom.uniform(getN);
+		      } while (obj.isOpen(row,col));
+		      obj.open(row, col);
+		      counter++;
+		    }
+		    return counter;
+		  }
+
+	   public static void main(String[] args){
+		    PercolationStats s = new PercolationStats(200,1000);
+		    StdOut.println(s.percThresh());
+		   /* StdOut.println("The condfidence low is: " + s.confidenceLo());
+		    StdOut.println("The confidence hi is: " + s.confidenceHi());
+		    StdOut.println("the stddev is " + s.stddev());*/
+		   // test client (described below)
+	   }
+	}
+

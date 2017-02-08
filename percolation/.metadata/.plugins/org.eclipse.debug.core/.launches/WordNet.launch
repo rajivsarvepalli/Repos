@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/Percolation/src/WordNet.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="WordNet"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;C:\Users\Rajiv Sarvepalli\Desktop\School work\AP CS\wordnet\&quot;C:\Users\Rajiv Sarvepalli\Desktop\School work\AP CS\wordnet\synsets6&quot;,&quot;C:\Users\Rajiv Sarvepalli\Desktop\School work\AP CS\wordnet\hypernyms11ManyPathsOneAncestor.txt&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Percolation"/>
+</launchConfiguration>

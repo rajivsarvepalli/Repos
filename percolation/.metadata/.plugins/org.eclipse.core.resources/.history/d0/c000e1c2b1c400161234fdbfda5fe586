@@ -1,0 +1,48 @@
+
+public class Percolation {
+	private int array[][];
+	private boolean check[][];
+	private Union uf;
+	private int max;
+	public Percolation(int n){
+		  uf = new Union(n*n+2);
+		  array = new int[n][n];  
+		  check = new boolean[n][n];
+		  max =n*n+1;
+		   // create n-by-n grid, with all sites blocked
+		  int num =2;
+		  for(int row = 0; row<array.length;row++){
+			  for(int col = 0; col <array[row].length;col++){
+				  num++;
+				  array[row][col] = num;
+			  }
+		  }
+	   }
+	   public void open(int row, int col){
+		   check[row][col] =true;
+		   if(isOpen(row+1,col))
+			   	uf.union(array[row][col],array[row+1][col]);
+		   if(isOpen(row,col+1))
+			   	uf.union(array[row][col],array[row][col+1]);
+		   if(isOpen(row-1,col))
+			   	uf.union(array[row][col],array[row-1][col]);
+		   if(isOpen(row+1,col))
+			   	uf.union(array[row][col],array[row+1][col]);
+			   	
+	   }// open site (row, col) if it is not open already
+	   public boolean isOpen(int row, int col){
+		   return check[row][col];
+	   }// is site (row, col) open?
+	   public boolean isFull(int row, int col){
+		   return uf.connected(0,array[row][col]);
+		   // is site (row, col) full?
+	   }
+	   public boolean percolates(){
+		   return uf.connected(0,max);// does the system percolate?
+	   }
+
+	   public static void main(String[] args) {  // test client (optional)
+		   Percolation perc = new Percolation(86);
+		   perc.open(2,3);
+	} 
+}

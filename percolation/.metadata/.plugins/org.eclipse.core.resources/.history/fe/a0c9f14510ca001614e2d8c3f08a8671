@@ -1,0 +1,36 @@
+import java.util.Arrays;
+import java.util.ArrayList; 
+
+public class FastCollinearPoints {
+	private int count;
+	private ArrayList<LineSegment> lines = new ArrayList<>();
+    public FastCollinearPoints(Point[] points){
+      if (points == null)
+         throw new NullPointerException();
+	   for(Point p: points){
+	   Arrays.sort(points, p.slopeOrder());	   
+	   }
+	   double[] slopes = new double[points.length-1];
+	   for(int i =0;i<slopes.length;i++){
+		   slopes[i] = points[0].slopeTo(points[i+1]); 
+		 /*  for(int j =1; j<slopes.length;j++){
+				while(slopes[i]==slopes[j])	
+					lines.add(new LineSegment(points[0],points[j+1]));
+			   }*/
+		   int end =1;
+		   while(slopes[i]==slopes[end]){
+			   end++;
+		   }
+		 
+	   }
+	   
+	   
+	   
+	   
+   }// finds all line segments containing 4 or more points
+   public int numberOfSegments(){
+   }// the number of line segments
+   public LineSegment[] segments(){
+   }// the line segments
+
+}
