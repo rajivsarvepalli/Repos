@@ -35,5 +35,6 @@ public class Outcast {
 	        String[] nouns = in.readAllStrings();
 	        StdOut.println(args[t] + ": " + outcast.outcast(nouns));
 	    }
+	   System.out.println();
 	}
 }
