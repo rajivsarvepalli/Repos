@@ -70,6 +70,7 @@ public class HamiltonCircuit {
 	    HamiltonCircuit h = new HamiltonCircuit(g);
 		System.out.println(h.check(h.marked));
 		System.out.println(h);
+		System.out.println("hello");
 
 
 		/*for(Point p: h.hp()){
