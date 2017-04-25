@@ -1,7 +1,7 @@
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.MinPQ;
-import edu.princeton.cs.algs4.Stack;
-import edu.princeton.cs.algs4.StdOut;
+import java.util.Scanner;
+import java.util.Stack;
+import java.io.File;
+import java.util.PriorityQueue;
 
 public class Solver {
 	private boolean possible;
@@ -28,26 +28,26 @@ public class Solver {
 		
 	}
 	
-	  private void in(SearchNode node, MinPQ<SearchNode> pq) {
+	  private void in(SearchNode node, PriorityQueue<SearchNode> pq) {
 	        for (Board nextBoard: node.board.neighbors()) {
 	            if ((node.prev == null) || (!nextBoard.equals(node.prev.board))) {
 	                SearchNode n1 = new SearchNode(nextBoard, node.moves + 1,node);
-	                pq.insert(n1);
+	                pq.add(n1);
 	            }
 	        }
 	    }
     public Solver(Board initial){
     	if(initial ==null)
     		throw new java.lang.NullPointerException();
-    	MinPQ<SearchNode> nodes = new MinPQ<SearchNode>();
-    	MinPQ<SearchNode> nodest = new MinPQ<SearchNode>();
+    	PriorityQueue<SearchNode> nodes = new PriorityQueue<SearchNode>();
+    	PriorityQueue<SearchNode> nodest = new PriorityQueue<SearchNode>();
     	SearchNode start = new SearchNode(initial,0,null);
     	SearchNode startT = new SearchNode(initial.twin(),0, null);
-    	nodes.insert(start);
-    	nodest.insert(startT);
+    	nodes.add(start);
+    	nodest.add(startT);
     	while(true){
-    		SearchNode n1 = nodes.delMin();
-    		SearchNode n2 = nodest.delMin();
+    		SearchNode n1 = nodes.remove();
+    		SearchNode n2 = nodest.remove();
     		if(n1.board.isGoal()){
     			l = n1;
     			moves = l.moves;
@@ -89,24 +89,39 @@ public class Solver {
     public static void main(String[] args) {
 
         // create initial board from file
-        In in = new In(args[0]);
-        int n = in.readInt();
-        int[][] blocks = new int[n][n];
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
-                blocks[i][j] = in.readInt();
-        Board initial = new Board(blocks);
+        try {
+            System.out.print("Enter the file name with extension : ");
 
-        // solve the puzzle
-        Solver solver = new Solver(initial);
+            Scanner in = new Scanner(System.in);
 
-        // print solution to standard output
-        if (!solver.isSolvable())
-            StdOut.println("No solution possible");
-        else {
-            StdOut.println("Minimum number of moves = " + solver.moves());
-            for (Board board : solver.solution())
-                StdOut.println(board);
+            File file = new File(in.nextLine());
+
+            in = new Scanner(file);
+            int n = in.nextInt();
+            int[][] blocks = new int[n][n];
+            while(in.hasNextInt()){
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                    blocks[i][j] = in.nextInt();
+            }
+            Board initial = new Board(blocks);
+
+            // solve the puzzle
+            Solver solver = new Solver(initial);
+
+            // print solution to standard output
+            if (!solver.isSolvable())
+                System.out.println("No solution possible");
+            else {
+                System.out.println("Minimum number of moves = " + solver.moves());
+                for (Board board : solver.solution())
+                    System.out.println(board);
+            }
+        }
+
+       catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }
+        

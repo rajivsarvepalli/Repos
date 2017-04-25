@@ -1,10 +1,7 @@
 
 
 import java.util.Arrays;
-
-import edu.princeton.cs.algs4.Stack;
-import edu.princeton.cs.algs4.StdOut;
-
+import java.util.Stack;
 public class Board {
 	private final int[][] tiles;
 	private final int n;
@@ -135,14 +132,14 @@ public class Board {
       int[][] blocks = {{8, 1, 3}, {4, 0, 2}, {7, 6, 5}};
 //      int[][] tiles = {{1, 0}, {2, 3}};
       Board a = new Board(blocks);
-      StdOut.println(a.dimension());
-      StdOut.println(a.hamming());
-      StdOut.println(a.manhattan());
-      StdOut.println(a);
-      StdOut.println(a.twin());
-      StdOut.println(a);
+      System.out.println(a.dimension());
+      System.out.println(a.hamming());
+      System.out.println(a.manhattan());
+      System.out.println(a);
+      System.out.println(a.twin());
+      System.out.println(a);
       for (Board board: a.neighbors()) {
-          StdOut.println(board);
+    	  System.out.println(board);
       System.out.println("hi");
       }// unit tests (not graded)
 }
