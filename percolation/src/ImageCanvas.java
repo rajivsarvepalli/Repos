@@ -16,19 +16,16 @@ public class ImageCanvas extends Canvas {
         public ImageCanvas() {
             try {
                 img = ImageIO.read(new File("C:/Users/Rajiv Sarvepalli/Desktop/8puzzle1.jpg"));  //put in the location of 8puzzle1.jpg, for example C:/Users/Rajiv Sarvepalli/Desktop/School work/AP CS/8puzzle1.jpg
-            } catch (IOException ex) {
+            } catch (IOException ex) {//exception catching 
                 ex.printStackTrace();
 				}
-		  }
-	 	  public Dimension getPreferredSize() {
-            return img == null ? new Dimension(200, 200) : new Dimension(img.getWidth(), img.getHeight());
-        }        
+		  }      
 		  @Override
         public void paint(Graphics g) {
-            super.paint(g);
+            super.paint(g);//paint the image onto the canvas
             if (img != null) {
-                int x = (getWidth() - img.getWidth()) / 2;
-                int y = (getHeight() - img.getHeight()) / 2;
+                int x = (getWidth() - img.getWidth()) / 2;//finding width
+                int y = (getHeight() - img.getHeight()) / 2;//finding height
                 g.drawImage(img, x, y, this);
             }
         }
