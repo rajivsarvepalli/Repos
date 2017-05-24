@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.io.File;
 import java.util.PriorityQueue;
+import java.awt.*;
+import javax.swing.*;
 
 public class Solver {
 	private boolean possible;
@@ -90,12 +92,15 @@ public class Solver {
 
         // create initial board from file
         try {
-            System.out.print("Enter the file name with extension : ");
-
+		  		JFrame frame = new JFrame("My Drawing");
+				ImageCanvas canvas = new ImageCanvas();           
+				frame.add(canvas);
+				canvas.setSize(600,400);
+				frame.pack();
+				frame.setVisible(true);
+            System.out.print("Enter the file name with extension : ");//file should be entered same as Image in ImageCanvas, use text files with 8puzzles
             Scanner in = new Scanner(System.in);
-
             File file = new File(in.nextLine());
-
             in = new Scanner(file);
             int n = in.nextInt();
             int[][] blocks = new int[n][n];
@@ -124,4 +129,3 @@ public class Solver {
         }
     }
 }
-        
