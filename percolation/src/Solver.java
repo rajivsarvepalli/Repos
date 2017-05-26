@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.awt.*;
 import java.util.Stack;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
-import java.awt.*;
+import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
 public class Solver {
@@ -92,13 +94,14 @@ public class Solver {
 
         // create initial board from file
         try {
-		  		JFrame frame = new JFrame("My Drawing");//making the pop-up happen
+        	//earlier version of pop-up
+		  	/*	JFrame frame = new JFrame("My Drawing");//making the pop-up happen
 				ImageCanvas canvas = new ImageCanvas();           
 				frame.add(canvas);
 				canvas.setSize(600,400);
 				frame.pack();
-				frame.setVisible(true);
-            System.out.print("Enter the file name with extension : ");//file should be entered same as Image in ImageCanvas, use text files with 8puzzles
+				frame.setVisible(true);*/
+            System.out.print("Enter the file name with extension : ");//file should be entered same like so: C:\Users\Rajiv Sarvepalli\Desktop\puzzle testing\puzzle4x4-03.txt, use text files with 8puzzles in the directory that you put it in
             Scanner in = new Scanner(System.in);
             File file = new File(in.nextLine());
             in = new Scanner(file);//scanning file ints into array of a board
@@ -114,13 +117,26 @@ public class Solver {
             // solve the puzzle
             Solver solver = new Solver(initial);
 
-            // print solution in a user freindly format
+            // print solution in a user friendly format
             if (!solver.isSolvable())
                 System.out.println("No solution possible");
             else {
                 System.out.println("Minimum number of moves = " + solver.moves());
-                for (Board board : solver.solution())
-                    System.out.println(board);
+                ArrayList<Board> a = new ArrayList<Board>();
+                for (Board board : solver.solution()){//solution is printed with final board at top, and bottom board is initial 
+                	a.add(0, board);
+                }
+                for(Board board: a){
+                	System.out.println(board);
+                	JFrame j = new JFrame();
+            		j.setSize(600, 600);
+            		j.getContentPane().add(new SolverVisualizer(board));//Utilizing solver to make the popups
+            		j.setLocationRelativeTo(null);
+            		j.setBackground(Color.LIGHT_GRAY);//background color of frame
+            		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            		j.setVisible(true);
+            		TimeUnit.SECONDS.sleep(2);//change this to make steps longer or shorter
+                }
             }
         }
 

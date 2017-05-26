@@ -19,6 +19,9 @@ public class Board {
     	}
     	return o;
     }
+    public int[][] getArray(){
+    	return tiles;
+    }
                                            // (where blocks[i][j] = block in row i, column j)
     public int dimension(){
     	return n;// board dimension n
