@@ -3,4 +3,4 @@
 Some relevant personal projects are included in this repository that is relevant to the material covered in those courses. 
 ## Authors
 
-* **Rajiv Sarvepalli** - *Created* - [RajivKing6](https://github.com/rajivking6)
+* **Rajiv Sarvepalli** - *Created* - [rajivsarvepalli](https://github.com/rajivsarvepalli)
